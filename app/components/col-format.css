@@ -1,0 +1,36 @@
+.col-format {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.col-format-break-all {
+  word-break: break-all;
+}
+
+.col-format-break-normal {
+  word-break: normal;
+}
+
+.col-format-break-word {
+  word-break: break-word;
+}
+
+.min-width-50 {
+  min-width: 50px;
+}
+
+.min-width-85 {
+  min-width: 85px;
+}
+
+.min-width-100 {
+  min-width: 100px;
+}
+
+.min-width-120 {
+  min-width: 120px;
+}
+
+.min-width-150 {
+  min-width: 150px;
+}

@@ -1,0 +1,44 @@
+{
+  "name": "individual-project-ui",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc"
+  },
+  "dependencies": {
+    "@openauthjs/openauth": "^0.4.3",
+    "@react-router/node": "^7.2.0",
+    "@react-router/serve": "^7.2.0",
+    "@tact/gds-component-library": "0.22.6",
+    "diff": "^7.0.0",
+    "diff2html": "^3.4.51",
+    "imask": "7.6.1",
+    "isbot": "^5.1.17",
+    "jsdiff": "^1.1.1",
+    "lodash": "^4.17.21",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-imask": "7.6.1",
+    "react-router": "^7.2.0",
+    "react-router-dom": "^7.2.0",
+    "uuid": "10.0.0",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.51.0",
+    "@react-router/dev": "^7.2.0",
+    "@types/diff": "^7.0.1",
+    "@types/lodash": "^4.17.15",
+    "@types/node": "^20",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "@types/uuid": "^10.0.0",
+    "react-router-devtools": "^1.1.0",
+    "typescript": "^5.7.2",
+    "vite": "^5.4.11",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}

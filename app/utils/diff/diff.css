@@ -1,0 +1,29 @@
+/* diff.css */
+.d2h-wrapper {
+    background-color: #f0f0f0; /* Custom background color */
+    font-family: 'Arial', sans-serif; /* Custom font */
+}
+
+.d2h-file-header {
+    display: none; /* Hide file headers */
+}
+
+.d2h-code-line {
+    color: #333; /* Custom text color */
+}
+
+.d2h-code-line-ctn {
+    padding: 5px 10px; /* Custom padding */
+}
+
+.d2h-diff-txt {
+    color: #d9534f; /* Custom color for diff text */
+}
+
+.d2h-ins {
+    background-color: #dff0d8; /* Custom background for inserted lines */
+}
+
+.d2h-del {
+    background-color: #f2dede; /* Custom background for deleted lines */
+}

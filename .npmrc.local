@@ -1,0 +1,2 @@
+@tact:registry=http://127.0.0.1:8091/repository/artifactory-npm-local/
+strict-ssl=false
