@@ -55,8 +55,12 @@ export async function listObjects(
     const correlationId = uuidv4();
 
     try {
+        const headers = await commonHeaders(correlationId);
         const response = await fetch(
-            `${S3_BUCKET_ENDPOINT}/${bucketName}/contents`
+            `${S3_BUCKET_ENDPOINT}/${bucketName}/contents`,
+            {
+                headers: headers
+            }
         );
 
         const data = await response.text();
@@ -96,6 +100,7 @@ export async function getObjectContent(
     const correlationId = uuidv4();
 
     try {
+        const headers = await commonHeaders(correlationId);
         const requestBody = {
             objectKey: objectKey
         };
@@ -103,9 +108,7 @@ export async function getObjectContent(
         const response = await fetch(
             `${S3_BUCKET_ENDPOINT}/${bucketName}/file`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers,
                 body: JSON.stringify({'objectKey': objectKey})
             });
 
@@ -151,10 +154,12 @@ export async function preUploadRequest(
         formData.append('file', file);
         formData.append('objectKey', objectKey);
 
+        const headers = await commonHeaders(correlationId);
         const response = await fetch(
             `${S3_BUCKET_ENDPOINT}/${bucketName}/pre-upload`, {
                 method: 'POST',
-                body: formData
+                body: formData,
+                headers: headers
             });
 
         const {status} = response;
@@ -200,9 +205,11 @@ export async function postObjectContent(
         formData.append('file', blob, objectKey);
         formData.append('objectKey', objectKey);
 
+        const headers = await commonHeaders(correlationId);
         const response = await fetch(`${S3_BUCKET_ENDPOINT}/${bucketName}/upload`, {
             method: 'POST',
             body: formData,
+            headers: headers
         });
 
         const {status} = response;

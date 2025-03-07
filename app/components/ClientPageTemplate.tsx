@@ -69,7 +69,7 @@ export default function ClientPageTemplate({
         }
     }, [pathname, showBreadcrumbs]);
 
-    const userId = 'user'; // TODO - take from token
+    const userId = 'user'; // TODO - take from token when implementing official auth
     return (
         <PageTemplate>
             <HmrcInternalHeader

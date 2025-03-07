@@ -32,3 +32,10 @@ export const AUDIT_PAGE_ERROR_RESPONSE_DEFAULT_SERVER_ERROR: ErrorResponseHandle
 export const AUDIT_PAGE_ERROR_RESPONSES: ErrorResponseHandlers = {
     default: AUDIT_PAGE_ERROR_RESPONSE_DEFAULT_SERVER_ERROR,
 };
+
+export const DETAILS_ELEMENT_SUMMARY = 'Help with Audit';
+export const DETAILS_ELEMENT_TEXT =
+    'Please enter your search filters and select the Search button to view relevant audit events. All filters are optional, and if left blank then all audit events will be displayed. Please note that the first 200 audit events will be shown. If you require more specific results, please narrow your search filters. Dates are formatted DD/MM/YYYY and time HH:MM:SS.';
+export const APP_LOCAL_DATE_EMPTY_FORMAT = '__/__/____';
+export const APP_LOCAL_TIME_EMPTY_FORMAT = '__:__';
+export const INPUT_DATE_MASK = 'd/`m/`Y';

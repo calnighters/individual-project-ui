@@ -4,6 +4,7 @@ import {redirect} from "react-router-dom";
 import {getExceptionResponse} from "~/utils/error-handling";
 import {HttpStatusCode} from "~/constants/api";
 import {AUDIT_DIFF_ENDPOINT, AUDIT_SEARCH_ENDPOINT} from "~/api/constants";
+import {commonHeaders} from "~/api/common";
 
 export async function postAuditSearch(
     searchRequest: AuditSearchRequest,
@@ -12,14 +13,13 @@ export async function postAuditSearch(
     const correlationId = uuidv4();
 
     try {
+        const headers = await commonHeaders(correlationId);
         const response = await fetch(
             AUDIT_SEARCH_ENDPOINT,
             {
                 method: 'POST',
                 body: JSON.stringify(searchRequest),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers
             },
         );
 
@@ -59,14 +59,13 @@ export async function postFindAuditDiff(
     const correlationId = uuidv4();
 
     try {
-        const response = await fetch( // TODO - replace with fetchRequestInitialiser for correlationId
+        const headers = await commonHeaders(correlationId);
+        const response = await fetch(
             AUDIT_DIFF_ENDPOINT,
             {
                 method: 'POST',
                 body: JSON.stringify(diffRequest),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: headers
             },
         );
 

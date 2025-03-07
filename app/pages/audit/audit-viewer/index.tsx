@@ -8,36 +8,21 @@ import {
     Heading,
     REGEX_PRINTABLE_ASCII_PATTERN, SectionBreak,
     Select, Spinner,
-    TagColor,
     TextInput
 } from "@tact/gds-component-library";
-import type { Option } from "@tact/gds-component-library";
+import type {Option} from "@tact/gds-component-library";
 import {useEffect, useRef, useState, useTransition} from "react";
 import type {DateValue} from "imask/masked/date";
 import {BackgroundOrganisationColorClass} from "@tact/gds-component-library/dist/theme/colors/color_classes";
 import {postAuditSearch} from "~/api/audit";
 import AuditTable from "~/pages/audit/audit-viewer/AuditTable";
 import {REGEX_APP_LOCAL_DATE_PATTERN, REGEX_APP_LOCAL_TIME_PATTERN} from "~/constants";
-import {AUDIT_PAGE_ERROR_RESPONSES} from "~/constants/pages/audit";
+import {
+    APP_LOCAL_DATE_EMPTY_FORMAT,
+    APP_LOCAL_TIME_EMPTY_FORMAT,
+    AUDIT_PAGE_ERROR_RESPONSES, DETAILS_ELEMENT_SUMMARY, DETAILS_ELEMENT_TEXT, INPUT_DATE_MASK
+} from "~/constants/pages/audit";
 import {handleApiErrorClientSide} from "~/utils";
-
-const DETAILS_ELEMENT_SUMMARY = 'Help with Audit';
-const DETAILS_ELEMENT_TEXT =
-    'Please enter your search filters and select the Search button to view relevant audit events. All filters are optional, and if left blank then all audit events will be displayed. Please note that the first 200 audit events will be shown. If you require more specific results, please narrow your search filters. Dates are formatted DD/MM/YYYY and time HH:MM:SS.';
-const APP_LOCAL_DATE_EMPTY_FORMAT = '__/__/____';
-const APP_LOCAL_TIME_EMPTY_FORMAT = '__:__';
-const INPUT_DATE_MASK = 'd/`m/`Y'; //TODO - update these to a constants?
-// TODO - move all of these to common types and utils files
-export interface AuditSearchParams {
-    eventType: string;
-    bucketName?: string;
-    objectKey?: string;
-    userName?: string;
-    fromDate?: string;
-    fromTime?: string;
-    toDate?: string;
-    toTime?: string;
-}
 
 const DEFAULT_SEARCH_PARAMS = {
     eventType: 'All',
@@ -72,7 +57,6 @@ export default function AuditViewer() {
     const onClickReset = () => {
         setSearchParams(DEFAULT_SEARCH_PARAMS);
         setAuditSearch(undefined);
-        // setErrors(undefined);
     };
 
     const onSetSearchParams = (value: string | SelectOption[], field: string) =>
@@ -81,23 +65,20 @@ export default function AuditViewer() {
             [field]: value,
         }));
 
-    const RESULTS_LIST = [ // TODO - update results table for colour tags
+    const RESULTS_LIST = [
         {
             name: 'VIEW',
-            color: TagColor.GREEN,
         },
         {
             name: 'UPLOAD',
-            color: TagColor.BLUE,
         },
         {
             name: 'MODIFY',
-            color: TagColor.YELLOW,
         }
     ];
     const mapEventTypeOptions = () => [
-        { children: 'All', value: 'All' },
-        ...RESULTS_LIST.map(({ name }) => ({
+        {children: 'All', value: 'All'},
+        ...RESULTS_LIST.map(({name}) => ({
             children: name,
             value: name,
         })),
@@ -299,7 +280,7 @@ export default function AuditViewer() {
         }
 
         if (errors.length > 0) {
-            return { errors };
+            return {errors};
         }
 
         let dateTime = getFormattedDateTimeStringFromDateTime({
@@ -362,27 +343,13 @@ export default function AuditViewer() {
 
     const onClickSearch = () => {
         setAuditSearch(undefined);
-        // setErrors(undefined);
 
-        const { startDateTime, endDateTime, errors } = validStartEndDateTime(
+        const {startDateTime, endDateTime, errors} = validStartEndDateTime(
             searchParams.fromDate,
             searchParams.fromTime,
             searchParams.toDate,
             searchParams.toTime,
         );
-
-        // document.title = setPageTitle(
-        //     !!errors,
-        //     getScrAuditMenuItem(ScrAuditMenuItem.AccessAudit).pageTitle!,
-        // );
-        //
-        // if (errors) {
-        //     setErrors(errors);
-        //     setExpandDetails(true);
-        //     errorsRef.current?.focus();
-        //     return;
-        // }
-        // TODO - need to do validation and handle errors
 
         const search: AuditSearchRequest = {
             eventType: searchParams.eventType === 'All' || !searchParams.eventType ? undefined : searchParams.eventType,
@@ -587,7 +554,7 @@ export default function AuditViewer() {
                         </DropPanel>
                     </GridCol>
                 </GridRow>
-                <SectionBreak size={'m'} />
+                <SectionBreak size={'m'}/>
                 <ButtonGroup>
                     <Button
                         dataTestId='button-search'
@@ -620,7 +587,7 @@ export default function AuditViewer() {
                 </ButtonGroup>
             </form>
             {isGetAuditSearchPending && (
-                <Spinner centerAlign dataTestId='page-spinner' />
+                <Spinner centerAlign dataTestId='page-spinner'/>
             )}
             {!isGetAuditSearchPending && auditSearch && (
                 <AuditTable auditResults={auditSearch}/>
